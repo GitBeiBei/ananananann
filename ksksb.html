@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+     <meta charset="utf-8">
+     <title>www.jb51.net jQuery图片变换</title>
+</head>
+<style type="text/css">
+     .show {
+          width: 330px;
+          height: auto;
+          margin: 50px auto;
+          background: #eee
+     }
+     .item {
+          background: #fff;
+          width: 300px;
+          height: auto;
+          float: left;
+          margin: 15px;
+     }
+     p {
+          padding: 15px;
+          color: #ff6600
+     }
+     .big-photo img {
+          width: 300px;
+          height: 300px;
+     }
+     .des-small img {
+          width: 30px;
+          height: 30px;
+     }
+     .des-small {
+          border: 1px solid #e0e0e0;
+          display: block;
+          float: left;
+     }
+     .clear {
+          clear: both
+     }
+     .colors {
+          border: 1px solid burlywood;
+     }
+</style>
+<body>
+     <div class="show">
+          <p></p>
+          <div class="item">
+               <a class="big-photo">
+                    <img src="img/9252150_165726249000_2.jpg" alt="big" />
+               </a>
+               <a class="des-small colors">
+                    <img src="img/9252150_165726249000_2.jpg" alt="small" />
+               </a>
+               <a class="des-small">
+                    <img src="img/popup-quickview-item-1.jpg" alt="small" />
+               </a>
+               <a class="des-small">
+                    <img src="img/u=4186486800,813755701&fm=26&gp=0.jpg" alt="small" />
+               </a>
+               <a class="des-small">
+                    <img src="img/u=4186486800,813755701&fm=26&gp=0.jpg" alt="small" />
+               </a>
+               <a class="des-small">
+                    <img src="img/u=4186486800,813755701&fm=26&gp=0.jpg" alt="small" />
+               </a>
+               <a class="des-small">
+                    <img src="img/u=4186486800,813755701&fm=26&gp=0.jpg" alt="small" />
+               </a>
+          </div>
+          <div class="clear">
+               <button class="shang">上</button>
+               <button class="xia">下</button>
+          </div>
+     </div>
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+     var index = 1
+     $(function () {
+          /** 更换小图片 */
+          $(".item a").click(function () {
+               changeImg($(this))
+               $(this).addClass('colors').siblings().removeClass('colors')
+          });
+     });
+     $('.clear .xia').click(function () {
+          var lest = $('.item .des-small').length
+          $('.item .des-small').removeClass('colors').eq(index).addClass('colors')
+          index++
+          if (index == lest - 1) {
+               index = -1;
+          }
+          changeImg($(index))
+          console.log(index)
+     })
+     function changeImg(obj) {
+          console.log(obj)
+          if (obj.find("img").attr("alt") == "small") {
+               var temp_big_src = obj.siblings('a').find('img[alt=big]').attr('src');
+               var temp_big_url = obj.siblings('a[class=big-photo]').attr('href');
+               var temp_small_src = obj.find('img').attr('src');
+               var temp_small_url = obj.attr('href');
+               obj.siblings('a').find('img[alt=big]').attr('src', temp_small_src);
+          }
+     }
+</script>
